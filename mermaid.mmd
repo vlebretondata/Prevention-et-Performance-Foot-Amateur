@@ -1,0 +1,86 @@
+erDiagram
+    JOUEURS {
+        int id_joueur PK
+        string prenom
+        string nom
+        date date_naissance
+        string poste
+        date date_arrivee
+    }
+
+    MATCHES {
+        int id_match PK
+        date match_date
+        string adversaire
+        string localisation
+        int buts_pour
+        int buts_contre
+    }
+
+    ENTRAINEMENTS_COLLECTIFS {
+        int id_entrainement PK
+        date date_entrainement
+        string type
+        int duree_minutes
+        string type_entrainement_co
+        int difficulte_co 
+    }
+
+    ENTRAINEMENTS_INDIVIDUELS {
+        int id_entrainement PK
+        date date_entrainement
+        string objectif
+        int duree_minutes
+        string type_entrainement_ind
+        int difficulte_ind
+    }
+
+    PARTICIPATION_MATCH {
+        int id PK
+        int id_joueur FK
+        int id_match FK
+        int minutes_jouees
+        int buts
+        int passes_decisives
+    }
+
+    PRESENCE_COLLECTIF {
+        int id PK
+        int id_joueur FK
+        int id_entrainement FK
+        boolean present
+    }
+
+    PRESENCE_INDIVIDUEL {
+        int id PK
+        int id_joueur FK
+        int id_entrainement FK
+    }
+
+    BLESSURES {
+        int id_blessure PK
+        int id_joueur FK
+        date date_blessure
+        string type_blessure
+        int gravite
+        date date_debut
+        date date_fin
+        int id_match FK
+        int id_entrainement_collectif FK
+        int id_entrainement_individuel FK
+    }
+
+    JOUEURS ||--o{ PARTICIPATION_MATCH : participe
+    MATCHES ||--o{ PARTICIPATION_MATCH : concerne
+
+    JOUEURS ||--o{ PRESENCE_COLLECTIF : assiste
+    ENTRAINEMENTS_COLLECTIFS ||--o{ PRESENCE_COLLECTIF : planifie
+
+    JOUEURS ||--o{ PRESENCE_INDIVIDUEL : suit
+    ENTRAINEMENTS_INDIVIDUELS ||--o{ PRESENCE_INDIVIDUEL : concerne
+
+    JOUEURS ||--o{ BLESSURES : subit
+    MATCHES ||--o{ BLESSURES : provoque
+    ENTRAINEMENTS_COLLECTIFS ||--o{ BLESSURES : provoque
+    ENTRAINEMENTS_INDIVIDUELS ||--o{ BLESSURES : provoque
+
