@@ -2,8 +2,6 @@
 
 Par Vincent LE BRETON
 
-Présentation vidéo: <URL HERE>
-
 ## Périmètre (Scope)
 
 Dans cette section, vous devez répondre aux questions suivantes :
